@@ -17,7 +17,7 @@ class AddOperation extends AbstractCommand
      *
      * @var string
      */
-    protected $signature = 'add {numbers*} The numbers to be added';
+    protected $signature = 'add {numbers* : The numbers to be added} ';
 
     /**
      * The console command description.
@@ -31,6 +31,7 @@ class AddOperation extends AbstractCommand
      *
      * @return void
      */
+
     public function __construct(
         AddOperationService $operation,
         LoggerService $logger
@@ -40,13 +41,4 @@ class AddOperation extends AbstractCommand
         $this->math = $operation;
     }
 
-    public function validate($arguments) {
-
-        if (count($arguments) < 2) {
-            $this->error('The number or operand must be 2 or more');
-            return false;
-        }
-
-        return true;
-    }
 }

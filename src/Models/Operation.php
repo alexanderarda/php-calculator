@@ -20,22 +20,6 @@ class Operation
         $this->timestamp = date('Y-m-d h:i:s');
     }
 
-    public function getSymbolDescription()
-    {
-
-        $command = "";
-        switch ($this->symbol){
-            case ($this->symbol == "+") : $command = "Add"; break;
-            case ($this->symbol == "-") : $command = "Subtract"; break;
-            case ($this->symbol == "/") : $command = "Divide"; break;
-            case ($this->symbol == "*") : $command = "Multiply"; break;
-            case ($this->symbol == "^") : $command = "Pow"; break;
-        }
-
-        return $command;
-    }
-
-
     public function getArguments()
     {
         return $this->arguments;

@@ -22,7 +22,7 @@ class Database implements DriverInterface
 
         Capsule::insert('INSERT INTO history (command,description,result,output) VALUES (:command,:description,:result,:output)',
             [
-                'command' => $model->getSymbolDescription(),
+                'command' => $model->getName(),
                 'description' => $model->getDescription(),
                 'result' => $model->getResult(),
                 'output' => $model->getTotal(),

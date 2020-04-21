@@ -48,6 +48,16 @@ class AbstractCommand extends Command
         $this->log = $log;
     }
 
+    public function validate($arguments) {
+
+        if (count($arguments) < 2) {
+            $this->error('The number or operand must be 2 or more');
+            return false;
+        }
+
+        return true;
+    }
+
     /**
      * Execute the console command.
      *
@@ -59,7 +69,6 @@ class AbstractCommand extends Command
         if ($this->validate($this->argument('numbers'))) {
 
             $calculation = new Operation($this->operationSymbol, $this->operationName, $this->argument('numbers'));
-
             $calculation = $this->math->doOperation($calculation);
 
             $this->log->save($calculation);
