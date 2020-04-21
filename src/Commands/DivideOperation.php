@@ -4,37 +4,37 @@
 namespace Jakmall\Recruitment\Calculator\Commands;
 
 
+use Jakmall\Recruitment\Calculator\Services\DivideOperationService;
 use Jakmall\Recruitment\Calculator\Services\LoggerService;
-use Jakmall\Recruitment\Calculator\Services\MultiplyOperationService;
 
-class MultiplyOperation extends AbstractCommand
+class DivideOperation extends AbstractCommand
 {
-
-    protected $operationSymbol = "*";
-    protected $operationName = "Multiply";
+    protected $operationSymbol = "/";
+    protected $operationName = "Divide";
 
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'multiply {numbers*} The numbers to be multiplied';
+    protected $signature = 'divide {numbers*} The numbers to be divided';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Multiply all given Numbers';
+    protected $description = 'Divide all given Numbers';
 
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct( MultiplyOperationService $operation, LoggerService $logger) {
+    public function __construct( DivideOperationService $operation, LoggerService $logger) {
         parent::__construct($logger);
         $this->math = $operation;
     }
+
 
 }

@@ -36,14 +36,5 @@ class SubtractOperation extends AbstractCommand
         parent::__construct($logger);
         $this->math = $operation;
     }
-
-    public function validate($arguments) {
-
-        if (count($arguments) < 2) {
-            $this->error('The number or operand must be 2 or more');
-            return false;
-        }
-
-        return true;
-    }
+    
 }
