@@ -6,10 +6,12 @@ namespace Jakmall\Recruitment\Calculator\Services;
 
 use Jakmall\Recruitment\Calculator\Models\Operation;
 
-class DivideOperationService implements OperationInterface
+class PowOperationService implements OperationInterface
 {
+
     public function doOperation(Operation $obj)
     {
+
         // TODO: Implement doOperation() method.
 
         $numbers = $obj->getArguments();
@@ -18,10 +20,11 @@ class DivideOperationService implements OperationInterface
             if($idx == 0)
                 $obj->setTotal($number);
             else
-                $obj->setTotal($obj->getTotal() / $number);
+                $obj->setTotal(pow($obj->getTotal(),$number));
         }
 
-
         return $obj;
+
     }
+
 }

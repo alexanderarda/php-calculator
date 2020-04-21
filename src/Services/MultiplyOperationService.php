@@ -6,7 +6,7 @@ namespace Jakmall\Recruitment\Calculator\Services;
 
 use Jakmall\Recruitment\Calculator\Models\Operation;
 
-class MultiplyOperationService
+class MultiplyOperationService implements OperationInterface
 {
     public function doOperation(Operation $obj)
     {

@@ -36,5 +36,5 @@ class SubtractOperation extends AbstractCommand
         parent::__construct($logger);
         $this->math = $operation;
     }
-    
+
 }
