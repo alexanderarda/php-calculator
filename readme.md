@@ -1,15 +1,25 @@
-# Jakmall Calculator
+# PHP Calculator 
 
-## Software Requirements
-- Docker
+#### :rocket:  Software Requirement
+```bash
+PHP version 7.4
+Composer
+MySQL / MariaDB
+```
 
-## Vendor installation
-```
-./composer install
-```
-## Run the Calculator
-```
-./calculator
-```
-"# php-calculator" 
-"# php-calculator" 
+#### :rocket: Installation
+
+```bash
+composer install
+Run SQL script calculator.sql
+Set database credential on database.php
+``` 
+
+#### :rocket: Run Calculator
+```bash
+Add <number> <number>
+Subtract <number> <number>
+Multiply <number> <number>
+Divide <number> <number>
+Pow <base> <exp>
+``` 
