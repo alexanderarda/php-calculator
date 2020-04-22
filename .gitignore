@@ -1,3 +1,7 @@
 /vendor
+<<<<<<< HEAD
 .idea
 /calculator.txt
+=======
+/.idea
+>>>>>>> feature/add-command
