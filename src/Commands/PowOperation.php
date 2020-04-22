@@ -18,7 +18,7 @@ class PowOperation extends AbstractCommand
      *
      * @var string
      */
-    protected $signature = 'pow {base} {exp} Exponent the number';
+    protected $signature = 'pow {numbers?* } Exponent the number';
 
     /**
      * The console command description.
@@ -37,22 +37,26 @@ class PowOperation extends AbstractCommand
         $this->math = $operation;
     }
 
+    public function validate($arguments) {
 
-    public function handle()
-    {
+        if(empty($arguments)){
+            $this->error('The number or operand is required for calculation');
+            return false;
+        }
 
-        $base = $this->argument('base');
-        $exp = $this->argument('exp');
+        if (count($arguments) != 2) {
+            $this->error('The number or operand must be <base> and <exp> only');
+            return false;
+        }
 
-        $numbers = array($base, $exp);
+        foreach ($arguments as $number){
+            if(!is_numeric($number)){
+                $this->error('Numeric operand is required');
+                return false;
+            }
+        }
 
-        $calculation = new Operation($this->operationSymbol, $this->operationName,$numbers);
-        $calculation = $this->math->doOperation($calculation);
-
-        $this->log->save($calculation);
-
-        $this->line($calculation->getResult());
-
+        return true;
     }
 
 }
