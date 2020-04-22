@@ -17,9 +17,11 @@ Set database credential on database.php
 
 #### :rocket: Run Calculator
 ```bash
-Add <number> <number>
-Subtract <number> <number>
-Multiply <number> <number>
-Divide <number> <number>
-Pow <base> <exp>
+add <number> <number>
+subtract <number> <number>
+multiply <number> <number>
+divide <number> <number>
+pow <base> <exp>
+history:list <commands> --driver=[default: "database"]
+history:clear
 ``` 
