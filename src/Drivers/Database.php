@@ -47,6 +47,6 @@ class Database implements DriverInterface
 
     public function delete()
     {
-        // TODO: Implement delete() method.
+        Capsule::table('history')->truncate();
     }
 }
