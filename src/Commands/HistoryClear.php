@@ -7,7 +7,7 @@ namespace Jakmall\Recruitment\Calculator\Commands;
 use Illuminate\Console\Command;
 use Jakmall\Recruitment\Calculator\Services\LoggerService;
 
-class HistoryList extends Command
+class HistoryClear extends Command
 {
 
     protected $logger;
@@ -16,14 +16,14 @@ class HistoryList extends Command
      *
      * @var string
      */
-    protected $signature = 'history:list {commands?*} {--driver=database}';
+    protected $signature = 'history:clear';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Show all calculation history';
+    protected $description = 'Clear all calculation history';
 
     /**
      * Create a new command instance.
@@ -43,18 +43,8 @@ class HistoryList extends Command
      */
     public function handle()
     {
-
-        $commands = $this->argument('commands');
-        $storageList = $this->logger->get($this->option('driver'), $commands);
-
-        if(empty($storageList)){
-            $this->info('History is empty');
-        } else {
-            $headers = ['Command', 'Description', 'Result', 'Output'];
-            $this->table($headers, $storageList);
+        if($this->logger->delete()){
+            $this->info("Calculation history has been cleared");
         }
-
-
     }
-
 }

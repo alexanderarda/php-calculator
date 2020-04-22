@@ -4,6 +4,7 @@
 namespace Jakmall\Recruitment\Calculator\Drivers;
 
 
+use Illuminate\Support\Str;
 use Jakmall\Recruitment\Calculator\Models\Operation as Model;
 
 class File implements DriverInterface
@@ -22,7 +23,12 @@ class File implements DriverInterface
             if(empty($commands)){
 
                 while(! feof($fn))  {
-                    $list [] = explode('|',fgets($fn));
+
+                    $row = str_replace(array("\n", "\r"), '', fgets($fn));
+
+                    if(Str::length($row) > 0)
+                        $list [] = explode('|',$row);
+
                 }
 
             }else{
@@ -31,9 +37,12 @@ class File implements DriverInterface
 
                 while(! feof($fn))  {
 
-                    $row = explode('|',fgets($fn));
-                    if(in_array(strtolower($row[0]), $commands)){
-                        $list [] = $row;
+                    $row = str_replace(array("\n", "\r"), '', fgets($fn));
+                    $arrRow = explode('|',$row);
+
+                    if(in_array(strtolower($arrRow[0]), $commands)){
+                        if(Str::length($row) > 0)
+                            $list [] = $arrRow;
                     }
                 }
 
@@ -41,10 +50,9 @@ class File implements DriverInterface
 
             fclose($fn);
 
-            return $list;
-        }
 
-        return ['history is empty'];
+        }
+        return $list;
     }
 
     public function append(Model $model)
@@ -59,7 +67,8 @@ class File implements DriverInterface
     public function delete()
     {
         if (file_exists(self::HISTORY_FILE)) {
-            rmdir(self::HISTORY_FILE);
+            $fh = fopen( self::HISTORY_FILE, 'w' );
+            fclose($fh);
         }
     }
 }

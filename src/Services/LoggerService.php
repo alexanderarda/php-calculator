@@ -22,4 +22,14 @@ class LoggerService
     {
         return Container::getInstance()->make($driver)->list($commands);
     }
+
+    // delete all existing calculation history
+    public function delete()
+    {
+        Container::getInstance()->make('file')->delete();
+        Container::getInstance()->make('database')->delete();
+
+        return true;
+    }
+
 }
