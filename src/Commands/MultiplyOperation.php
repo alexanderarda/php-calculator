@@ -18,7 +18,7 @@ class MultiplyOperation extends AbstractCommand
      *
      * @var string
      */
-    protected $signature = 'multiply {numbers*} The numbers to be multiplied';
+    protected $signature = 'multiply {numbers?*} The numbers to be multiplied';
 
     /**
      * The console command description.

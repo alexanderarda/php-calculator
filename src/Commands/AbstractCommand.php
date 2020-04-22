@@ -50,9 +50,21 @@ class AbstractCommand extends Command
 
     public function validate($arguments) {
 
+        if(empty($arguments)){
+            $this->error('The number or operand is required for calculation');
+            return false;
+        }
+
         if (count($arguments) < 2) {
             $this->error('The number or operand must be 2 or more');
             return false;
+        }
+
+        foreach ($arguments as $number){
+            if(!is_numeric($number)){
+                $this->error('Numeric operand is required');
+                return false;
+            }
         }
 
         return true;
@@ -66,16 +78,25 @@ class AbstractCommand extends Command
     public function handle()
     {
 
-        if ($this->validate($this->argument('numbers'))) {
+        try{
 
-            $calculation = new Operation($this->operationSymbol, $this->operationName, $this->argument('numbers'));
-            $calculation = $this->math->doOperation($calculation);
+            $numbers = $this->argument('numbers');
 
-            $this->log->save($calculation);
+            if ($this->validate($numbers)) {
 
-            $this->line($calculation->getResult());
+                $calculation = new Operation($this->operationSymbol, $this->operationName, $this->argument('numbers'));
+                $calculation = $this->math->doOperation($calculation);
 
+                $this->log->save($calculation);
+
+                $this->line($calculation->getResult());
+
+            }
+
+        }catch (\Throwable $e){
+            $this->error("error command handler : ".$e);
         }
+
 
     }
 

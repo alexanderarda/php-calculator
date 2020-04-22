@@ -18,7 +18,7 @@ class SubtractOperation extends AbstractCommand
      *
      * @var string
      */
-    protected $signature = 'subtract {numbers*} The numbers to be subtracted';
+    protected $signature = 'subtract {numbers?*} The numbers to be subtracted';
 
     /**
      * The console command description.

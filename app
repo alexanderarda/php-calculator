@@ -13,32 +13,25 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 try {
 
     require_once __DIR__.'/vendor/autoload.php';
+    $database = require_once __DIR__.'/database.php';
 
-    $container = Container::getInstance();
-
-
+    // Initialize Capsule
     $capsule = new Capsule;
 
-    $capsule->addConnection([
-        'driver'    => 'mysql',
-        'host'      => 'localhost',
-        'database'  => 'calculator',
-        'username'  => 'root',
-        'password'  => 'admin',
-        'charset'   => 'utf8',
-        'collation' => 'utf8_unicode_ci',
-        'prefix'    => '',
-    ]);
+    // Database connection
+    $capsule->addConnection($database);
 
     // Set the event dispatcher used by Eloquent models
     $capsule->setEventDispatcher(new Dispatcher(new Container));
 
-    // Make this Capsule instance available globally via static methods... (optional)
+    // Make this Capsule instance available globally
     $capsule->setAsGlobal();
 
-    // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
+    // Setup the Eloquent ORM
     $capsule->bootEloquent();
 
+    // Initialize Container
+    $container = Container::getInstance();
 
     $container->bind('file', function($app) {
         return new File();

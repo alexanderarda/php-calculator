@@ -11,20 +11,37 @@ class File implements DriverInterface
 
     private const HISTORY_FILE = 'calculator.txt';
 
-    public function list()
+    public function list($commands)
     {
+
+        $list = [];
+
         if (file_exists(self::HISTORY_FILE)) {
-            $results = [];
             $fn = fopen(self::HISTORY_FILE,"r");
 
-            while(! feof($fn))  {
-                $results[] = fgets($fn);
-                var_dump(fgets($fn));
+            if(empty($commands)){
+
+                while(! feof($fn))  {
+                    $list [] = explode('|',fgets($fn));
+                }
+
+            }else{
+
+                $commands = array_map('strtolower', $commands);
+
+                while(! feof($fn))  {
+
+                    $row = explode('|',fgets($fn));
+                    if(in_array(strtolower($row[0]), $commands)){
+                        $list [] = $row;
+                    }
+                }
+
             }
 
             fclose($fn);
 
-            return $results;
+            return $list;
         }
 
         return ['history is empty'];
@@ -33,7 +50,7 @@ class File implements DriverInterface
     public function append(Model $model)
     {
 
-        $txt = sprintf("%s|%s|%s|%s|%s", $model->getName(), $model->getDescription(), $model->getTotal(), $model->getResult(), $model->getTimeStamp());
+        $txt = sprintf("%s|%s|%s|%s", $model->getName(), $model->getDescription(), $model->getTotal(), $model->getResult());
 
         file_put_contents(self::HISTORY_FILE, $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
 

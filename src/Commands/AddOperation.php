@@ -17,7 +17,7 @@ class AddOperation extends AbstractCommand
      *
      * @var string
      */
-    protected $signature = 'add {numbers* : The numbers to be added} ';
+    protected $signature = 'add {numbers?* : The numbers to be added} ';
 
     /**
      * The console command description.

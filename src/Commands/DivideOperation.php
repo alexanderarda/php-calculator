@@ -17,7 +17,7 @@ class DivideOperation extends AbstractCommand
      *
      * @var string
      */
-    protected $signature = 'divide {numbers*} The numbers to be divided';
+    protected $signature = 'divide {numbers?*} The numbers to be divided';
 
     /**
      * The console command description.
